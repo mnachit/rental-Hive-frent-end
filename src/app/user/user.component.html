@@ -1,0 +1,174 @@
+<div class="row mt-5">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-around">
+                <h4 class="card-title">All users</h4><button type="button" class="btn btn-success"
+                    data-bs-toggle="modal" data-bs-target="#adduserModal">Add Users</button>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead class="text-primary">
+                            <tr>
+                                <th class="text-center">
+                                    first name
+                                </th>
+                                <th class="text-center">
+                                    last name
+                                </th>
+                                <th class="text-center">
+                                    email
+                                </th>
+                                <th class="text-center">
+                                    action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let user of users">
+                                <td class="text-center">
+                                    {{user.firstName}}
+                                </td>
+                                <td class="text-center">
+                                    {{user.lastName}}
+                                </td>
+                                <td class="text-center">
+                                    {{user.email}}
+                                </td>
+                                <td class="text-center d-flex justify-content-around">
+                                    <button (click)="deleteUser(user.id)">Delete User</button>
+                                    <button (click)="showUserWithId(user.id)" data-bs-toggle="modal" data-bs-target="#showdataUser">Show User</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="adduserModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Add User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="firstInput" class="form-label">First Name:</label>
+                        <input type="text" class="form-control" id="first" name="first"
+                            placeholder="Enter your first name" [(ngModel)]="user.firstName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="lastInput" class="form-label">Last Name:</label>
+                        <input type="text" class="form-control" id="last" name="last" placeholder="Enter your last name"
+                            [(ngModel)]="user.lastName">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="emailInput" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email"
+                            [(ngModel)]="user.email">
+                    </div>
+
+                    <!-- Additional Fields -->
+                    <div class="mb-3">
+                        <label for="passwordInput" class="form-label">Password:</label>
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="Enter your password" [(ngModel)]="user.password">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="rolesInput" class="form-label">Roles (comma-separated):</label>
+                        <input type="number" class="form-control" id="roles" name="roles"
+                            placeholder="Enter roles separated by commas" [(ngModel)]="user.roles">
+                    </div>
+
+
+                    <div class="mb-3">
+                        <label for="organizationNameInput" class="form-label">Organization Name:</label>
+                        <input type="text" class="form-control" id="organizationName" name="organizationName"
+                            placeholder="Enter organization name" [(ngModel)]="user.organization.name">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="organizationSinceInput" class="form-label">Organization Since:</label>
+                        <input type="number" class="form-control" id="organizationSince" name="organizationSince"
+                            placeholder="Enter organization since" [(ngModel)]="user.organization.since">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="organizationIndustryInput" class="form-label">Organization Industry:</label>
+                        <input type="text" class="form-control" id="organizationIndustry" name="organizationIndustry"
+                            placeholder="Enter organization industry" [(ngModel)]="user.organization.industry">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="organizationSizeInput" class="form-label">Organization Size:</label>
+                        <input type="number" class="form-control" id="organizationSize" name="organizationSize"
+                            placeholder="Enter organization size" [(ngModel)]="user.organization.size">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button (click)="addUser()" class="btn btn-primary" data-bs-dismiss="modal">Save User</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Your modal content -->
+<div class="modal" id="showdataUser" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">User Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div *ngFor="let user of DataUser">
+                        <div class="mb-3">
+                            <label for="firstInput" class="form-label">First Name:</label>
+                            <input type="text" class="form-control" id="first" name="first" [value]="user.firstName"
+                                placeholder="Enter your first name" disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="lastInput" class="form-label">Last Name:</label>
+                            <input type="text" class="form-control" id="last" name="last" [value]="user.lastName"
+                                placeholder="Enter your last name" disabled>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="emailInput" class="form-label">Email:</label>
+                            <input type="email" class="form-control" id="email" name="email" [value]="user.email"
+                                placeholder="Enter your email" disabled>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="modals" *ngIf="success">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p><i class="fas fa-check-circle text-success"></i> Success!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
